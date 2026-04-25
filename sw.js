@@ -1,4 +1,4 @@
-const CACHE_NAME = 'neon-hub-v5';
+const CACHE_NAME = 'neon-hub-v6';
 const ASSETS = [
   './',
   './index.html',
@@ -13,7 +13,10 @@ const ASSETS = [
   './2048/game.js',
   './flappy/index.html',
   './flappy/style.css',
-  './flappy/game.js'
+  './flappy/game.js',
+  './breakout/index.html',
+  './breakout/style.css',
+  './breakout/game.js'
 ];
 
 self.addEventListener('install', event => {
