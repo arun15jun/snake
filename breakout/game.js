@@ -121,14 +121,37 @@ function drawBricks() {
                 bricks[c][r].x = brickX;
                 bricks[c][r].y = brickY;
                 
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = `hsl(${r * 40}, 100%, 50%)`;
+                // Brown Textured Look
+                const baseColor = "#8B4513"; // Saddle Brown
+                const lightColor = "#A0522D"; // Sienna
+                const darkColor = "#5D2E0C"; // Dark Brown
+                
                 ctx.beginPath();
                 ctx.rect(brickX, brickY, brickWidth, BRICK_HEIGHT);
-                ctx.fillStyle = `hsl(${r * 40}, 100%, 50%)`;
+                ctx.fillStyle = baseColor;
                 ctx.fill();
+                
+                // Add texture (Bevel effect)
+                ctx.strokeStyle = lightColor;
+                ctx.lineWidth = 2;
+                ctx.strokeRect(brickX + 1, brickY + 1, brickWidth - 2, BRICK_HEIGHT - 2);
+                
+                ctx.strokeStyle = darkColor;
+                ctx.beginPath();
+                ctx.moveTo(brickX, brickY + BRICK_HEIGHT);
+                ctx.lineTo(brickX + brickWidth, brickY + BRICK_HEIGHT);
+                ctx.lineTo(brickX + brickWidth, brickY);
+                ctx.stroke();
+
+                // Add small brick lines for "texture"
+                ctx.strokeStyle = "rgba(0,0,0,0.2)";
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(brickX + brickWidth/2, brickY);
+                ctx.lineTo(brickX + brickWidth/2, brickY + BRICK_HEIGHT);
+                ctx.stroke();
+
                 ctx.closePath();
-                ctx.shadowBlur = 0;
             }
         }
     }
