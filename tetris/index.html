@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Neon Tetris | Premium Arcade</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header id="game-header">
+        <a href="../index.html" class="btn-back">← HUB</a>
+        <div class="stats">
+            <span id="score-val">0</span>
+        </div>
+    </header>
+
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="start-screen">
+            <h1>NEON TETRIS</h1>
+            <button class="btn-primary" id="start-btn">START GAME</button>
+            <p style="margin-top: 20px; opacity: 0.6; font-size: 14px;">SWIPE: MOVE | TAP: ROTATE</p>
+            <p id="best-score" style="margin-top: 10px; opacity: 0.6;">Best: 0</p>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

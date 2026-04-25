@@ -1,4 +1,4 @@
-const CACHE_NAME = 'neon-hub-v6';
+const CACHE_NAME = 'neon-hub-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -16,7 +16,10 @@ const ASSETS = [
   './flappy/game.js',
   './breakout/index.html',
   './breakout/style.css',
-  './breakout/game.js'
+  './breakout/game.js',
+  './tetris/index.html',
+  './tetris/style.css',
+  './tetris/game.js'
 ];
 
 self.addEventListener('install', event => {
