@@ -50,18 +50,15 @@ function updateUI() {
                 tile.className = `tile tile-${grid[r][c]}`;
                 tile.textContent = grid[r][c];
                 
-                const x = c * 25;
-                const y = r * 25;
-                tile.style.transform = `translate(${c * (100)}%, ${r * (100)}%)`;
+                // Use percentages for robust positioning
+                tile.style.left = `${c * 25}%`;
+                tile.style.top = `${r * 25}%`;
                 
-                // Adjust for gap (CSS handles positioning better with grid, but for animation translate is better)
-                // Actually simplified translate for grid layout:
-                const gap = 10;
-                const cellSize = (gridContainer.clientWidth - 30) / 4;
-                tile.style.left = `${c * (cellSize + gap)}px`;
-                tile.style.top = `${r * (cellSize + gap)}px`;
-                tile.style.width = `${cellSize}px`;
-                tile.style.height = `${cellSize}px`;
+                // Adjust for padding inside the tile if needed, but the gap is handled by the 25% grid
+                // To account for the 10px gap in CSS, we use a slightly smaller tile size in CSS and calc here
+                tile.style.width = `calc(25% - 10px)`;
+                tile.style.height = `calc(25% - 10px)`;
+                tile.style.margin = `5px`;
 
                 gridContainer.appendChild(tile);
             }

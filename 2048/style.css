@@ -113,15 +113,13 @@ h1 {
 
 .tile {
     position: absolute;
-    width: calc(25% - 12.5px);
-    height: calc(25% - 12.5px);
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     font-weight: 700;
-    transition: transform 0.1s, background-color 0.1s;
+    transition: transform 0.1s, background-color 0.1s, left 0.1s, top 0.1s;
     z-index: 2;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
@@ -152,7 +150,7 @@ h1 {
     backdrop-filter: blur(10px);
 }
 
-.hidden { display: none; }
+#game-over.hidden { display: none; }
 
 .btn-primary {
     background: var(--primary-color);
