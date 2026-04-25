@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Neon Snake | Premium Game</title>
+    
+    <!-- PWA & iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Neon Snake">
+    <link rel="apple-touch-icon" href="icon.png">
+    
+    <!-- Splash Screens -->
+    <link rel="apple-touch-startup-image" href="splash.png">
+    
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="ui-overlay">
+        <div class="stat-card">
+            <span class="stat-label">Score</span>
+            <span id="score-val" class="stat-value">0</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Best</span>
+            <span id="best-val" class="stat-value">0</span>
+        </div>
+    </div>
+
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="start-screen">
+            <h1>NEON SNAKE</h1>
+            <button class="btn-start" id="start-btn">START GAME</button>
+            <p style="margin-top: 20px; opacity: 0.5; font-size: 12px;">SWIPE TO CONTROL</p>
+        </div>
+    </div>
+
+    <div id="ios-install-hint">
+        <div class="hint-icon">📲</div>
+        <div class="hint-text">
+            Tap the <b>Share</b> button and select <b>"Add to Home Screen"</b> to install the full app experience.
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW Registered'))
+                    .catch(err => console.log('SW Error: ', err));
+            });
+        }
+
+        // iOS Install Hint Logic
+        const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.navigator.standalone === true;
+        
+        if (isIos && !isStandalone) {
+            setTimeout(() => {
+                document.getElementById('ios-install-hint').style.display = 'flex';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
