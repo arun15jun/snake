@@ -1,4 +1,4 @@
-const CACHE_NAME = 'neon-snake-v1';
+const CACHE_NAME = 'neon-snake-v2';
 const ASSETS = [
   './',
   './index.html',
