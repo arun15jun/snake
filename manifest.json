@@ -1,6 +1,6 @@
 {
-  "name": "Neon Snake Premium",
-  "short_name": "Neon Snake",
+  "name": "Neon Arcade Hub",
+  "short_name": "Neon Hub",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#0a0a0c",

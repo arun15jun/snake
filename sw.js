@@ -1,12 +1,19 @@
-const CACHE_NAME = 'neon-snake-v4';
+const CACHE_NAME = 'neon-hub-v1';
 const ASSETS = [
   './',
   './index.html',
-  './style.css',
-  './game.js',
   './manifest.json',
   './icon.png',
-  './splash.png'
+  './splash.png',
+  './snake/index.html',
+  './snake/style.css',
+  './snake/game.js',
+  './2048/index.html',
+  './2048/style.css',
+  './2048/game.js',
+  './flappy/index.html',
+  './flappy/style.css',
+  './flappy/game.js'
 ];
 
 self.addEventListener('install', event => {

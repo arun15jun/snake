@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Neon 2048 | Premium Puzzle</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header id="game-header">
+        <div class="header-left">
+            <a href="../index.html" class="btn-back">← HUB</a>
+            <h1>2048</h1>
+        </div>
+        <div class="stats-container">
+            <div class="stat-card">
+                <span class="stat-label">Score</span>
+                <span id="score-val" class="stat-value">0</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Best</span>
+                <span id="best-val" class="stat-value">0</span>
+            </div>
+        </div>
+    </header>
+
+    <div id="game-container">
+        <div id="grid-container">
+            <!-- Grid cells and tiles will be generated here -->
+        </div>
+        
+        <div id="game-over" class="hidden">
+            <h2 id="over-title">GAME OVER</h2>
+            <button class="btn-primary" onclick="resetGame()">TRY AGAIN</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

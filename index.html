@@ -3,77 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Neon Snake | Premium Game</title>
+    <title>Neon Game Hub | Premium Arcade</title>
     
-    <!-- PWA & iOS Meta Tags -->
+    <!-- PWA Meta -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Neon Snake">
     <link rel="apple-touch-icon" href="icon.png">
-    
-    <!-- Splash Screens -->
-    <link rel="apple-touch-startup-image" href="splash.png">
-    
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css">
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0a0a0c;
+            --primary-color: #00ff88;
+            --secondary-color: #ff0055;
+            --accent-color: #00d4ff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: calc(40px + env(safe-area-inset-top)) 20px 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .game-grid {
+            width: 100%;
+            max-width: 400px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .game-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-decoration: none;
+            color: #fff;
+            transition: transform 0.2s, background 0.2s;
+            backdrop-filter: blur(10px);
+        }
+
+        .game-card:active {
+            transform: scale(0.98);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .game-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .snake-icon { background: linear-gradient(135deg, #00ff88, #008844); box-shadow: 0 0 20px rgba(0,255,136,0.3); }
+        .puzzle-icon { background: linear-gradient(135deg, #ffaa00, #ff5500); box-shadow: 0 0 20px rgba(255,170,0,0.3); }
+        .bird-icon { background: linear-gradient(135deg, #00d4ff, #0055ff); box-shadow: 0 0 20px rgba(0,212,255,0.3); }
+
+        .game-info h2 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .game-info p {
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        #ios-install-hint {
+            margin-top: auto;
+            padding: 20px;
+            background: var(--glass-bg);
+            border-radius: 15px;
+            font-size: 14px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <header id="game-header">
-        <div class="stat-card">
-            <span class="stat-label">Score</span>
-            <span id="score-val" class="stat-value">0</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-label">Lives</span>
-            <span id="lives-val" class="stat-value">3</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-label">Best</span>
-            <span id="best-val" class="stat-value">0</span>
-        </div>
-    </header>
 
-    <div id="game-container">
-        <canvas id="gameCanvas"></canvas>
-        
-        <div id="start-screen">
-            <h1>NEON SNAKE</h1>
-            <button class="btn-start" id="start-btn">START GAME</button>
-            <p style="margin-top: 20px; opacity: 0.5; font-size: 12px;">SWIPE TO CONTROL</p>
-        </div>
+    <h1>NEON HUB</h1>
+
+    <div class="game-grid">
+        <a href="snake/index.html" class="game-card">
+            <div class="game-icon snake-icon">🐍</div>
+            <div class="game-info">
+                <h2>Neon Snake</h2>
+                <p>Eat, grow, and survive.</p>
+            </div>
+        </a>
+
+        <a href="2048/index.html" class="game-card">
+            <div class="game-icon puzzle-icon">🧩</div>
+            <div class="game-info">
+                <h2>Neon 2048</h2>
+                <p>Merge tiles to reach 2048.</p>
+            </div>
+        </a>
+
+        <a href="flappy/index.html" class="game-card">
+            <div class="game-icon bird-icon">🐦</div>
+            <div class="game-info">
+                <h2>Neon Flappy</h2>
+                <p>Tap to fly through the neon city.</p>
+            </div>
+        </a>
     </div>
 
     <div id="ios-install-hint">
-        <div class="hint-icon">📲</div>
-        <div class="hint-text">
-            Tap the <b>Share</b> button and select <b>"Add to Home Screen"</b> to install the full app experience.
-        </div>
+        Tap <b>Share</b> and <b>"Add to Home Screen"</b> to install the arcade!
     </div>
 
-    <script src="game.js"></script>
     <script>
-        // Service Worker Registration
+        // SW Registration
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('SW Registered'))
-                    .catch(err => console.log('SW Error: ', err));
-            });
+            navigator.serviceWorker.register('sw.js');
         }
 
-        // iOS Install Hint Logic
+        // Show hint only on iOS Safari non-standalone
         const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
         const isStandalone = window.navigator.standalone === true;
-        
         if (isIos && !isStandalone) {
-            setTimeout(() => {
-                document.getElementById('ios-install-hint').style.display = 'flex';
-            }, 3000);
+            document.getElementById('ios-install-hint').style.display = 'block';
         }
     </script>
 </body>
