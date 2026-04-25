@@ -1,6 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreEl = document.getElementById('score-val');
+const livesEl = document.getElementById('lives-val');
 const bestEl = document.getElementById('best-val');
 const startBtn = document.getElementById('start-btn');
 const startScreen = document.getElementById('start-screen');
@@ -18,6 +19,7 @@ let dy = 0;
 let nextDx = 0;
 let nextDy = 0;
 let score = 0;
+let lives = 3;
 let highScore = localStorage.getItem('snakeHighScore') || 0;
 let gameLoop;
 let isPaused = true;
@@ -48,9 +50,24 @@ function resetGame() {
     nextDx = 0;
     nextDy = -1;
     score = 0;
+    lives = 3;
     scoreEl.textContent = score;
+    livesEl.textContent = lives;
     speed = 150;
     placeFood();
+}
+
+function resetSnake() {
+    snake = [
+        { x: 10, y: 10 },
+        { x: 10, y: 11 },
+        { x: 10, y: 12 }
+    ];
+    dx = 0;
+    dy = -1;
+    nextDx = 0;
+    nextDy = -1;
+    vibrate([100, 50, 100]);
 }
 
 function placeFood() {
@@ -119,7 +136,13 @@ function move() {
 
     // Self collision
     if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
-        gameOver();
+        lives--;
+        livesEl.textContent = lives;
+        if (lives > 0) {
+            resetSnake();
+        } else {
+            gameOver();
+        }
         return;
     }
 

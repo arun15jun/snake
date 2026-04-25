@@ -57,30 +57,33 @@ canvas {
     top: -80px;
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    padding: 0 10px;
+    justify-content: space-around;
+    padding: 0 5px;
+    gap: 5px;
 }
 
 .stat-card {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    padding: 10px 20px;
+    padding: 8px 12px;
     border-radius: 12px;
     backdrop-filter: blur(5px);
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
+    min-width: 0;
 }
 
 .stat-label {
-    font-size: 10px;
+    font-size: 9px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     opacity: 0.6;
 }
 
 .stat-value {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--primary-color);
     text-shadow: 0 0 10px var(--primary-color);
