@@ -1,3 +1,5 @@
+import { saveHighScore } from '../shared/leaderboard.js';
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreEl = document.getElementById('score-val');
@@ -86,6 +88,7 @@ function update() {
             if (score > bestScore) {
                 bestScore = score;
                 localStorage.setItem('flappyBestScore', bestScore);
+                saveHighScore('flappy', score);
             }
         }
 

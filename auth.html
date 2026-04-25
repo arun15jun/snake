@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Login | Neon Arcade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0c;
+            --primary-color: #00ff88;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .auth-container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            backdrop-filter: blur(15px);
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            background: linear-gradient(to bottom, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 8px;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            padding: 12px 15px;
+            border-radius: 10px;
+            color: #fff;
+            font-family: inherit;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .btn-auth {
+            width: 100%;
+            background: var(--primary-color);
+            color: #000;
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 20px rgba(0,255,136,0.2);
+        }
+
+        .switch-auth {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        .switch-auth span {
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="btn-back">← BACK</a>
+
+    <div class="auth-container">
+        <h1 id="auth-title">Welcome Back</h1>
+        
+        <div class="input-group">
+            <label>Email Address</label>
+            <input type="email" id="email" placeholder="gamer@neon.com">
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="••••••••">
+        </div>
+
+        <button class="btn-auth" id="btn-submit">LOGIN</button>
+
+        <div class="switch-auth">
+            <p id="toggle-text">Don't have an account? <span id="toggle-auth">Sign Up</span></p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth } from './firebase-config.js';
+        import { 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+        const toggleBtn = document.getElementById('toggle-auth');
+        const title = document.getElementById('auth-title');
+        const submitBtn = document.getElementById('btn-submit');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        let isLogin = true;
+
+        // Toggle UI
+        toggleBtn.addEventListener('click', () => {
+            isLogin = !isLogin;
+            title.textContent = isLogin ? 'Welcome Back' : 'Create Account';
+            submitBtn.textContent = isLogin ? 'LOGIN' : 'SIGN UP';
+            document.getElementById('toggle-text').innerHTML = isLogin 
+                ? "Don't have an account? <span id='toggle-auth'>Sign Up</span>" 
+                : "Already have an account? <span id='toggle-auth'>Login</span>";
+            document.getElementById('toggle-auth').addEventListener('click', () => toggleBtn.click());
+        });
+
+        // Handle Auth
+        submitBtn.addEventListener('click', async () => {
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            if (!email || !password) return alert("Please fill in all fields");
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Processing...";
+
+            try {
+                if (isLogin) {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    alert("Logged in successfully!");
+                } else {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                    alert("Account created successfully!");
+                }
+                window.location.href = 'index.html';
+            } catch (error) {
+                alert(error.message);
+                submitBtn.disabled = false;
+                submitBtn.textContent = isLogin ? 'LOGIN' : 'SIGN UP';
+            }
+        });
+
+        // Redirect if already logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,3 +1,5 @@
+import { saveHighScore } from '../shared/leaderboard.js';
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreEl = document.getElementById('score-val');
@@ -156,6 +158,7 @@ function move() {
             highScore = score;
             localStorage.setItem('snakeHighScore', highScore);
             bestEl.textContent = highScore;
+            saveHighScore('snake', score);
         }
         placeFood();
         vibrate(50);

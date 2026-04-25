@@ -1,3 +1,5 @@
+import { saveHighScore } from '../shared/leaderboard.js';
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreEl = document.getElementById('score-val');
@@ -78,6 +80,7 @@ function collisionDetection() {
                     if (score > bestScore) {
                         bestScore = score;
                         localStorage.setItem('breakoutBestScore', bestScore);
+                        saveHighScore('breakout', score);
                     }
                     if (score === BRICK_ROWS * BRICK_COLS) {
                         alert("LEVEL CLEARED!");

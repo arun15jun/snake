@@ -115,6 +115,9 @@
     </style>
 </head>
 <body>
+    <div id="auth-header" style="width: 100%; max-width: 400px; display: flex; justify-content: flex-end; margin-bottom: -20px;">
+        <a href="auth.html" id="login-btn" style="color: var(--primary-color); text-decoration: none; font-size: 14px; font-weight: 700; background: var(--glass-bg); padding: 8px 15px; border-radius: 50px; border: 1px solid var(--glass-border);">LOGIN</a>
+    </div>
 
     <h1>NEON HUB</h1>
 
@@ -164,11 +167,31 @@
         Tap <b>Share</b> and <b>"Add to Home Screen"</b> to install the arcade!
     </div>
 
-    <script>
+    <script type="module">
+        import { auth } from './firebase-config.js';
+        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+        const loginBtn = document.getElementById('login-btn');
+
         // SW Registration
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
         }
+
+        // Auth State Check
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const username = user.email.split('@')[0];
+                loginBtn.textContent = username.toUpperCase();
+                loginBtn.href = "#";
+                loginBtn.addEventListener('click', async () => {
+                    if (confirm("Do you want to logout?")) {
+                        await signOut(auth);
+                        window.location.reload();
+                    }
+                });
+            }
+        });
 
         // Show hint only on iOS Safari non-standalone
         const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;

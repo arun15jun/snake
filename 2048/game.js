@@ -1,3 +1,5 @@
+import { saveHighScore } from '../shared/leaderboard.js';
+
 const gridContainer = document.getElementById('grid-container');
 const scoreEl = document.getElementById('score-val');
 const bestEl = document.getElementById('best-val');
@@ -69,6 +71,7 @@ function updateUI() {
         bestScore = score;
         localStorage.setItem('2048BestScore', bestScore);
         bestEl.textContent = bestScore;
+        saveHighScore('2048', score);
     }
 }
 
