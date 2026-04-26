@@ -1,5 +1,3 @@
-import { saveHighScore } from '../shared/leaderboard.js';
-
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const scoreEl = document.getElementById('score-val');
@@ -156,7 +154,7 @@ function playerReset() {
             bestScore = score;
             localStorage.setItem('tetrisBestScore', bestScore);
             bestEl.textContent = `Best: ${bestScore}`;
-            saveHighScore('tetris', score);
+            if (window.NeonArcade) window.NeonArcade.saveHighScore('tetris', score);
         }
     }
 }

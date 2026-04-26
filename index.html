@@ -167,31 +167,12 @@
         Tap <b>Share</b> and <b>"Add to Home Screen"</b> to install the arcade!
     </div>
 
-    <script type="module">
-        import { auth } from './firebase-config.js';
-        import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-        const loginBtn = document.getElementById('login-btn');
-
+    <script type="module" src="arcade-core.js"></script>
+    <script>
         // SW Registration
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
         }
-
-        // Auth State Check
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const username = user.email.split('@')[0];
-                loginBtn.textContent = username.toUpperCase();
-                loginBtn.href = "#";
-                loginBtn.addEventListener('click', async () => {
-                    if (confirm("Do you want to logout?")) {
-                        await signOut(auth);
-                        window.location.reload();
-                    }
-                });
-            }
-        });
 
         // Show hint only on iOS Safari non-standalone
         const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;

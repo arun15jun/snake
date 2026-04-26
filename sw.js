@@ -1,7 +1,8 @@
-const CACHE_NAME = 'neon-hub-v10';
+const CACHE_NAME = 'neon-hub-v11';
 const ASSETS = [
   './',
   './index.html',
+  './arcade-core.js',
   './manifest.json',
   './icon.png',
   './splash.png',
